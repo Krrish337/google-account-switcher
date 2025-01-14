@@ -1,0 +1,59 @@
+/* style.css */
+
+/* Basic Page Styling */
+body {
+    font-family: sans-serif;
+    margin: 20px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+/* Authentication Section */
+#auth-section {
+    text-align: center; /* Center login/registration forms */
+}
+
+/* Dashboard Styling */
+#dashboard {
+    /* Style the account list */
+    #account-list {
+        list-style: none;
+        padding: 0;
+
+        li {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 5px;
+            cursor: pointer; /* Indicate that accounts are clickable */
+
+            &:hover {
+                background-color: #f5f5f5;
+            }
+
+            img { /* Style profile images */
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+        }
+    }
+
+    /* Style the "Add Account" button */
+    #add-account {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+}
