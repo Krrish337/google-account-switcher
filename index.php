@@ -1,5 +1,5 @@
 <?php
-// index.php
+// index.php 
 
 session_start();
 
@@ -12,20 +12,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-}
-
-// Handle registration (if form is submitted)
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["register"])) {
-    $username = $_POST["username"];
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT); // Hash the password
-
-    $sql = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "Registration successful!";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
 }
 
 // Handle login (if form is submitted)
@@ -41,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"])) {
         if (password_verify($password, $row["password"])) {
             $_SESSION["user_id"] = $row["id"];
             $_SESSION["username"] = $row["username"];
-            // Redirect to dashboard or display success message
+            // Redirect to dashboard
             header("Location: dashboard.php"); 
             exit();
         } else {
@@ -65,13 +51,6 @@ $conn->close();
 <body>
 
     <div id="auth-section">
-        <h2>Register</h2>
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            Username: <input type="text" name="username" required><br><br>
-            Password: <input type="password" name="password" required><br><br>
-            <input type="submit" name="register" value="Register">
-        </form>
-
         <h2>Login</h2>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             Username: <input type="text" name="username" required><br><br>
