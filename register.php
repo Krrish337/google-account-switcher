@@ -4,7 +4,7 @@
 session_start();
 
 // Include the database configuration
-require_once 'db_config.php'; 
+require_once 'db_config.php';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -22,11 +22,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["register"])) {
     $sql = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
 
     if ($conn->query($sql) === TRUE) {
-        // Registration successful, redirect to login page or display success message
-        header("Location: index.php"); // Redirect to login
+        // Registration successful, redirect to login page 
+        header("Location: index.php"); 
         exit();
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        // Display error message on the page
+        $error_message = "Error: " . $sql . "<br>" . $conn->error; 
     }
 }
 
@@ -44,6 +45,11 @@ $conn->close();
 
     <div id="auth-section">
         <h2>Register</h2>
+
+        <?php if (isset($error_message)): ?> 
+            <p style="color: red;"><?php echo $error_message; ?></p> 
+        <?php endif; ?>
+
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             Username: <input type="text" name="username" required><br><br>
             Password: <input type="password" name="password" required><br><br>
